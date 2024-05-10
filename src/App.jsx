@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
+import { RxDotFilled } from "react-icons/rx";
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const goToSlide = (slidesIndex) => {
+    setCurrentIndex(slidesIndex);
+  };
   const handlePrevClick = () => {
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slide.length - 1 : currentIndex - 1;
@@ -41,15 +46,26 @@ function App() {
         ></div>
         <div
           onClick={handlePrevClick}
-          className=" hidden bg-white/60 hover:bg-white text-black group-hover:block duration-500 absolute top-[50%] left-5 -translate-x-0 translate-y-[-50% rounded-full p-2 cursor-auto ] "
+          className=" hidden bg-white/60 hover:bg-white text-black group-hover:block duration-300 absolute top-[50%] left-5 -translate-x-0 translate-y-[-50% rounded-full p-2 cursor-auto ] "
         >
           <BsChevronCompactLeft size={30} />
         </div>
         <div
           onClick={handleNextClick}
-          className="hidden bg-white/60 hover:bg-white text-black group-hover:block duration-500 absolute top-[50%] right-5 -translate-x-0 translate-y-[-50% rounded-full p-2 cursor-auto ] "
+          className="hidden bg-white/60 hover:bg-white text-black group-hover:block duration-300 absolute top-[50%] right-5 -translate-x-0 translate-y-[-50% rounded-full p-2 cursor-auto ] "
         >
           <BsChevronCompactRight size={30} />
+        </div>
+        <div className="flex justify-center py-2 text-white top-4">
+          {slide.map((slides, slidesIndex) => (
+            <div
+              key={slidesIndex}
+              onClick={() => goToSlide(slidesIndex)}
+              className="text-2xl cursor-pointer"
+            >
+              <RxDotFilled />
+            </div>
+          ))}
         </div>
       </div>
     </>
